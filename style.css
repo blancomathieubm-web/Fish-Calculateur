@@ -101,6 +101,21 @@ li button:hover {
   padding: 20px;
   text-align: center;
 }
+.bouton-soft {
+  background-color: #3490db;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bouton-soft:hover {
+  background-color: #2176bd;
+}
 
 
 @media (max-width: 600px) {
@@ -132,5 +147,6 @@ li button:hover {
   0%   { background-color: #ffeaa7; }
   100% { background-color: white; }
 }
+
 
 
