@@ -88,6 +88,15 @@ li button:hover {
   background-color: #c0392b;
 }
 
+.action-btn {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: block;
+  width: 100%;
+}
+
+
+
 @media (max-width: 600px) {
   input, select, button {
     width: 100%;
@@ -117,3 +126,4 @@ li button:hover {
   0%   { background-color: #ffeaa7; }
   100% { background-color: white; }
 }
+
