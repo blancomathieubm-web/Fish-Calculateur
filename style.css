@@ -118,6 +118,25 @@ li button:hover {
 }
 
 
+.bouton-neon {
+  background-color: transparent;
+  color: #00f0ff;
+  border: 2px solid #00f0ff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-shadow: 0 0 5px #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.bouton-neon:hover {
+  background-color: #00f0ff;
+  color: #000;
+}
+
+
 @media (max-width: 600px) {
   input, select, button {
     width: 100%;
@@ -147,6 +166,7 @@ li button:hover {
   0%   { background-color: #ffeaa7; }
   100% { background-color: white; }
 }
+
 
 
 
