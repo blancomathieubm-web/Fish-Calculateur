@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3498db">
+  <title>Calculateur de poissons</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>🎣 Session de pêche</h2>
+
+  <!-- Champ pour saisir le nom du pêcheur -->
+  <label for="pecheur">Nom du pêcheur :</label>
+  <input type="text" id="pecheur" placeholder="Ex : Mathieu">
+
+  <!-- Sélection de l'espèce -->
+  <label for="espece">Espèce :</label>
+  <select id="espece">
+    <option value="">-- Choisir une espèce --</option>
+    <option value="bar_franc">BAR FRANC</option>
+  <option value="bar_mouchete">BAR MOUCHETE</option>
+  <option value="turbot">TURBOT</option>
+  <option value="barbue">BARBUE</option>
+  <option value="sole">SOLE</option>
+  <option value="sar">SAR</option>
+  <option value="raye">RAYE</option>
+  <option value="griset">GRISET</option>
+  <option value="daurade_royale">DAURADE ROYALE</option>
+  <option value="mulet">MULET</option>
+  <option value="orphie">ORPHIE</option>
+  <option value="ombrine">OMBRINE</option>
+  <option value="baliste">BALISTE</option>
+  <option value="limande">LIMANDE</option>
+  <option value="maquereau">MAQUEREAU</option>
+  <option value="carrelet">CARRELET - PLIE - FLET</option>
+  <option value="merlan">MERLAN</option>
+  <option value="lieu">LIEU</option>
+  <option value="chinchard">CHINCHARD</option>
+  <option value="cabillaud">CABILLAUD</option>
+  <option value="morue">MORUE</option>
+  <option value="maigre">MAIGRE</option>
+  <option value="truite">TRUITE</option>
+  <option value="saumon">SAUMON</option>
+  <option value="congre">CONGRE</option>
+  <option value="anguille">ANGUILLE</option>
+  <option value="vielle">VIELLE</option>
+  <option value="coquette">COQUETTE</option>
+  <option value="labre">LABRE</option>
+  <option value="tacaud">TACAUD</option>
+  <option value="alose">ALOSE</option>
+  <option value="grondin">GRONDIN</option>
+  <option value="gobie">GOBIE</option>
+  <option value="vive">VIVE</option>
+  <option value="loche">LOCHE</option>
+  <option value="bogue">BOGUE</option>
+  <option value="rascasse">RASCASSE</option>
+  <option value="demoiselle">DEMOISELLE</option>
+  <option value="lancon">LANÇON</option>
+  <option value="requin_emissole">REQUIN ÉMISSOLE</option>
+  <option value="liche">LICHE</option>
+  <option value="bonite">BONITE</option>
+  <option value="eperlan">EPERLAN</option>
+  <option value="rouget">ROUGET</option>
+  <option value="oblade">OBLADE</option>
+  <option value="petite_roussette">PETITE ROUSSETTE</option>
+  <option value="saupe">SAUPE</option>
+  <option value="serpenton">SERPENTON</option>
+  <option value="raie_commune">RAIE COMMUNE LARGEUR</option>
+  <option value="raie_aigle">RAIE AIGLE LARGEUR</option>
+  <option value="raie_torpille">RAIE TORPILLE LARGEUR</option>
+  <option value="raie_pastenague">RAIE PASTENAGUE LARGEUR</option>
+  <option value="grande_vive">GRANDE VIVE</option>
+</select>
+
+  <!-- Champ pour saisir la longueur -->
+  <label for="longueur">Longueur (cm) :</label>
+  <input type="number" id="longueur" min="1" max="150">
+
+  <!-- Bouton pour ajouter une prise -->
+  <button onclick="ajouterPoisson()">Ajouter</button>
+
+  <!-- Liste des poissons ajoutés -->
+  <ul id="liste"></ul>
+
+  <!-- Affichage du poids total -->
+  <p id="total">Poids total : 0.000 kg</p>
+
+  <!-- Bouton pour réinitialiser la session -->
+  <button onclick="reinitialiserSession()">🗑️ Réinitialiser la session</button>
+
+  <!-- Bouton Tipeee -->
+  <a href="https://fr.tipeee.com/peche-calculateur/" target="_blank" class="tipeee-btn">
+    💖 Soutenir le projet sur Tipeee
+  </a>
+
+ <button onclick="exporterSession()">📄 Exporter la session</button>
+
+  
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('✅ Service Worker enregistré'))
+        .catch(error => console.error('❌ Erreur SW:', error));
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
