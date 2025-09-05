@@ -88,28 +88,19 @@
   <!-- Affichage du poids total -->
   <p id="total">Poids total : 0.000 kg</p>
 
-  <!-- Bouton pour réinitialiser la session -->
-  <button onclick="reinitialiserSession()">🗑️ Réinitialiser la session</button>
-
-  
-
- <button onclick="exporterSession()">📄 Exporter la session</button>
+  <button class="action-btn" onclick="reinitialiserSession()">🗑️ Réinitialiser la session</button>
+<button class="action-btn" onclick="exporterSession()">📄 Exporter la session</button>
 <a href="mailto:blanco.mathieu.bm@gmail.com">
-  <button>📬 Contact</button>
+  <button class="action-btn">📬 Contact</button>
 </a>
+
 
   <!-- Bouton Tipeee -->
   <a href="https://fr.tipeee.com/peche-calculateur/" target="_blank" class="tipeee-btn">
     💖 Soutenir le projet sur Tipeee
   </a>
 
-button,
-.tipeee-btn {
-  margin-top: 12px;
-  margin-bottom: 12px;
-  display: block;
-  width: 100%;
-}
+
 
   
   <!-- Service Worker -->
@@ -124,6 +115,7 @@ button,
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
