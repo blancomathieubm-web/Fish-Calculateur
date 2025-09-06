@@ -1,3 +1,7 @@
+// Forcer le rechargement avec un paramètre unique pour contourner le cache
+if (location.href.indexOf('nocache') === -1) {
+  location.href = location.href + '?nocache=' + new Date().getTime();
+}
 
 const baremes = {
   alose: {
@@ -6361,6 +6365,7 @@ function exporterSession() {
   lien.download = `session_${pecheur}.txt`;
   lien.click();
 }
+
 
 
 
