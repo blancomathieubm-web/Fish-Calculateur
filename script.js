@@ -1,5 +1,6 @@
-
-const baremes = {
+window.onload = function () {
+  const baremes = {
+    
   alose: {
     1: 1,
     2: 1,
@@ -6202,164 +6203,156 @@ const baremes = {
 
 
 
-// Variable globale pour suivre le poids total
-let totalPoids = 0;
 
-// Fonction principale pour ajouter un poisson à la liste
-function ajouterPoisson() {
-  const espece = document.getElementById("espece").value;
-  const longueur = parseInt(document.getElementById("longueur").value);
-  const pecheur = document.getElementById("pecheur").value.trim();
+  let totalPoids = 0;
 
-  if (!pecheur || !espece || isNaN(longueur)) {
-    alert("Merci de remplir tous les champs !");
-    return;
-  }
+  function ajouterPoisson() {
+    const espece = document.getElementById("espece").value;
+    const longueur = parseInt(document.getElementById("longueur").value);
+    const pecheur = document.getElementById("pecheur").value.trim();
 
-  if (!baremes[espece]) {
-    alert("Espèce non reconnue.");
-    return;
-  }
-
-  let poidsGr = baremes[espece][longueur];
-
-  // Si la longueur n’est pas dans le barème mais entre 1 et 15 cm
-  if (!poidsGr) {
-    if (longueur >= 1 && longueur <= 15) {
-      poidsGr = 1; // 1 gramme par défaut
-    } else {
-      alert("Longueur non disponible pour cette espèce.");
+    if (!pecheur || !espece || isNaN(longueur)) {
+      alert("Merci de remplir tous les champs !");
       return;
     }
-  }
 
-  const poidsKg = (poidsGr / 1000).toFixed(3);
+    if (!baremes[espece]) {
+      alert("Espèce non reconnue.");
+      return;
+    }
 
-  const item = document.createElement("li");
-  item.textContent = `${espece} - ${longueur} cm - ${poidsKg} kg`;
+    let poidsGr = baremes[espece][longueur];
 
-  item.classList.add("flash");
-  setTimeout(() => item.classList.remove("flash"), 500);
+    if (!poidsGr) {
+      if (longueur >= 1 && longueur <= 15) {
+        poidsGr = 1; // poids par défaut
+      } else {
+        alert("Longueur non disponible pour cette espèce.");
+        return;
+      }
+    }
 
-  const btn = document.createElement("button");
-  btn.textContent = "Supprimer";
-  btn.onclick = function () {
-    item.remove();
-    totalPoids -= poidsGr;
-    document.getElementById("total").textContent =
-      `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
-    sauvegarderPoissons();
-  };
+    const poidsKg = (poidsGr / 1000).toFixed(3);
 
-  item.appendChild(btn);
-  document.getElementById("liste").appendChild(item);
-
-  totalPoids += poidsGr;
-  document.getElementById("total").textContent =
-    `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
-
-  sauvegarderPoissons();
-
-  document.getElementById("longueur").value = "";
-  document.getElementById("espece").selectedIndex = 0;
-}
-
-// Sauvegarde dans le localStorage
-function sauvegarderPoissons() {
-  const pecheur = document.getElementById("pecheur").value.trim();
-  if (!pecheur) return;
-
-  const items = [];
-  document.querySelectorAll("#liste li").forEach(li => {
-    items.push(li.textContent);
-  });
-
-  localStorage.setItem(`prises_${pecheur}`, JSON.stringify(items));
-  localStorage.setItem(`poids_${pecheur}`, totalPoids);
-}
-
-// Chargement des données
-function chargerPoissons() {
-  const pecheur = document.getElementById("pecheur").value.trim();
-  if (!pecheur) return;
-
-  const data = localStorage.getItem(`prises_${pecheur}`);
-  const poids = localStorage.getItem(`poids_${pecheur}`);
-  if (!data) return;
-
-  const items = JSON.parse(data);
-  document.getElementById("liste").innerHTML = "";
-
-  items.forEach(text => {
     const item = document.createElement("li");
-    item.textContent = text;
+    item.textContent = `${espece} - ${longueur} cm - ${poidsKg} kg`;
+
+    item.classList.add("flash");
+    setTimeout(() => item.classList.remove("flash"), 500);
 
     const btn = document.createElement("button");
     btn.textContent = "Supprimer";
     btn.onclick = function () {
       item.remove();
+      totalPoids -= poidsGr;
+      document.getElementById("total").textContent =
+        `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
       sauvegarderPoissons();
     };
 
     item.appendChild(btn);
     document.getElementById("liste").appendChild(item);
-  });
 
-  totalPoids = parseFloat(poids);
-  document.getElementById("total").textContent =
-    `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
-}
+    totalPoids += poidsGr;
+    document.getElementById("total").textContent =
+      `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
 
-// Réinitialisation de la session
-function reinitialiserSession() {
-  const pecheur = document.getElementById("pecheur").value.trim();
-  if (!pecheur) return;
+    sauvegarderPoissons();
 
-  if (confirm("Voulez-vous vraiment réinitialiser cette session ?")) {
-    localStorage.removeItem(`prises_${pecheur}`);
-    localStorage.removeItem(`poids_${pecheur}`);
+    document.getElementById("longueur").value = "";
+    document.getElementById("espece").selectedIndex = 0;
+  }
+
+  function sauvegarderPoissons() {
+    const pecheur = document.getElementById("pecheur").value.trim();
+    if (!pecheur) return;
+
+    const items = [];
+    document.querySelectorAll("#liste li").forEach(li => {
+      items.push(li.textContent);
+    });
+
+    localStorage.setItem(`prises_${pecheur}`, JSON.stringify(items));
+    localStorage.setItem(`poids_${pecheur}`, totalPoids);
+  }
+
+  function chargerPoissons() {
+    const pecheur = document.getElementById("pecheur").value.trim();
+    if (!pecheur) return;
+
+    const data = localStorage.getItem(`prises_${pecheur}`);
+    const poids = localStorage.getItem(`poids_${pecheur}`);
+    if (!data) return;
+
+    const items = JSON.parse(data);
     document.getElementById("liste").innerHTML = "";
-    totalPoids = 0;
-    document.getElementById("total").textContent = "Poids total : 0.000 kg";
+
+    items.forEach(text => {
+      const item = document.createElement("li");
+      item.textContent = text;
+
+      const btn = document.createElement("button");
+      btn.textContent = "Supprimer";
+      btn.onclick = function () {
+        item.remove();
+        sauvegarderPoissons();
+      };
+
+      item.appendChild(btn);
+      document.getElementById("liste").appendChild(item);
+    });
+
+    totalPoids = parseFloat(poids);
+    document.getElementById("total").textContent =
+      `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
   }
-}
 
-// Export de la session
-function exporterSession() {
-  const pecheur = document.getElementById("pecheur").value.trim();
-  if (!pecheur) {
-    alert("Veuillez saisir le nom du pêcheur.");
-    return;
+  function reinitialiserSession() {
+    const pecheur = document.getElementById("pecheur").value.trim();
+    if (!pecheur) return;
+
+    if (confirm("Voulez-vous vraiment réinitialiser cette session ?")) {
+      localStorage.removeItem(`prises_${pecheur}`);
+      localStorage.removeItem(`poids_${pecheur}`);
+      document.getElementById("liste").innerHTML = "";
+      totalPoids = 0;
+      document.getElementById("total").textContent = "Poids total : 0.000 kg";
+    }
   }
 
-  const data = localStorage.getItem(`prises_${pecheur}`);
-  const poids = localStorage.getItem(`poids_${pecheur}`);
-  if (!data) {
-    alert("Aucune session enregistrée pour ce pêcheur.");
-    return;
+  function exporterSession() {
+    const pecheur = document.getElementById("pecheur").value.trim();
+    if (!pecheur) {
+      alert("Veuillez saisir le nom du pêcheur.");
+      return;
+    }
+
+    const data = localStorage.getItem(`prises_${pecheur}`);
+    const poids = localStorage.getItem(`poids_${pecheur}`);
+    if (!data) {
+      alert("Aucune session enregistrée pour ce pêcheur.");
+      return;
+    }
+
+    const prises = JSON.parse(data);
+    let contenu = `Session de pêche : ${pecheur}\n\n`;
+    prises.forEach((prise, index) => {
+      contenu += `${index + 1}. ${prise}\n`;
+    });
+    contenu += `\nPoids total : ${(parseFloat(poids) / 1000).toFixed(3)} kg`;
+
+    const blob = new Blob([contenu], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const lien = document.createElement("a");
+    lien.href = url;
+    lien.download = `session_${pecheur}.txt`;
+    lien.click();
   }
 
-  const prises = JSON.parse(data);
-  let contenu = `Session de pêche : ${pecheur}\n\n`;
-  prises.forEach((prise, index) => {
-    contenu += `${index + 1}. ${prise}\n`;
-  });
-  contenu += `\nPoids total : ${(parseFloat(poids) / 1000).toFixed(3)} kg`;
+  document.getElementById("pecheur").addEventListener("change", chargerPoissons);
 
-  const blob = new Blob([contenu], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const lien = document.createElement("a");
-  lien.href = url;
-  lien.download = `session_${pecheur}.txt`;
-  lien.click();
-}
-
-// Chargement automatique quand le nom change
-document.getElementById("pecheur").addEventListener("change", chargerPoissons);
-
-
-
-
-
-
-
+  // Expose les fonctions globalement pour les boutons HTML
+  window.ajouterPoisson = ajouterPoisson;
+  window.reinitialiserSession = reinitialiserSession;
+  window.exporterSession = exporterSession;
+};
