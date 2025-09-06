@@ -6202,7 +6202,6 @@ const baremes = {
 
 
 
-
 // Variable globale pour suivre le poids total
 let totalPoids = 0;
 
@@ -6212,37 +6211,36 @@ function ajouterPoisson() {
   const longueur = parseInt(document.getElementById("longueur").value);
   const pecheur = document.getElementById("pecheur").value.trim();
 
-  // Vérifie que tous les champs sont remplis
   if (!pecheur || !espece || isNaN(longueur)) {
     alert("Merci de remplir tous les champs !");
     return;
   }
 
-  // Vérifie que l'espèce existe dans le barème
   if (!baremes[espece]) {
     alert("Espèce non reconnue.");
     return;
   }
 
-  // Vérifie que la longueur est disponible pour cette espèce
-  const poidsGr = baremes[espece][longueur];
+  let poidsGr = baremes[espece][longueur];
+
+  // Si la longueur n’est pas dans le barème mais entre 1 et 15 cm
   if (!poidsGr) {
-    alert("Longueur non disponible pour cette espèce.");
-    return;
+    if (longueur >= 1 && longueur <= 15) {
+      poidsGr = 1; // 1 gramme par défaut
+    } else {
+      alert("Longueur non disponible pour cette espèce.");
+      return;
+    }
   }
 
-  // Calcule le poids en kg
   const poidsKg = (poidsGr / 1000).toFixed(3);
 
-  // Crée un nouvel élément <li> pour afficher la prise
   const item = document.createElement("li");
   item.textContent = `${espece} - ${longueur} cm - ${poidsKg} kg`;
 
-  // Ajoute une animation visuelle à l'ajout
   item.classList.add("flash");
   setTimeout(() => item.classList.remove("flash"), 500);
 
-  // Crée le bouton de suppression
   const btn = document.createElement("button");
   btn.textContent = "Supprimer";
   btn.onclick = function () {
@@ -6250,26 +6248,23 @@ function ajouterPoisson() {
     totalPoids -= poidsGr;
     document.getElementById("total").textContent =
       `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
-    sauvegarderPoissons(); // Met à jour le stockage après suppression
+    sauvegarderPoissons();
   };
 
   item.appendChild(btn);
   document.getElementById("liste").appendChild(item);
 
-  // Met à jour le poids total
   totalPoids += poidsGr;
   document.getElementById("total").textContent =
     `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
 
-  // Sauvegarde la liste après ajout
   sauvegarderPoissons();
 
-  // Réinitialise les champs
   document.getElementById("longueur").value = "";
   document.getElementById("espece").selectedIndex = 0;
 }
 
-// Fonction pour sauvegarder les prises et le poids total dans localStorage
+// Sauvegarde dans le localStorage
 function sauvegarderPoissons() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6283,7 +6278,7 @@ function sauvegarderPoissons() {
   localStorage.setItem(`poids_${pecheur}`, totalPoids);
 }
 
-// Fonction pour charger les prises et le poids total du pêcheur sélectionné
+// Chargement des données
 function chargerPoissons() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6293,7 +6288,7 @@ function chargerPoissons() {
   if (!data) return;
 
   const items = JSON.parse(data);
-  document.getElementById("liste").innerHTML = ""; // Vide la liste avant de la remplir
+  document.getElementById("liste").innerHTML = "";
 
   items.forEach(text => {
     const item = document.createElement("li");
@@ -6315,7 +6310,7 @@ function chargerPoissons() {
     `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
 }
 
-// Fonction pour réinitialiser la session en cours
+// Réinitialisation de la session
 function reinitialiserSession() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6329,12 +6324,7 @@ function reinitialiserSession() {
   }
 }
 
-// Recharge les données du pêcheur dès que son nom est modifié
-document.getElementById("pecheur").addEventListener("change", chargerPoissons);
-
-
-
-// Fonction pour exporter la session du pêcheur en fichier texte
+// Export de la session
 function exporterSession() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) {
@@ -6363,6 +6353,10 @@ function exporterSession() {
   lien.download = `session_${pecheur}.txt`;
   lien.click();
 }
+
+// Chargement automatique quand le nom change
+document.getElementById("pecheur").addEventListener("change", chargerPoissons);
+
 
 
 
