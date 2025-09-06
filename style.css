@@ -137,13 +137,7 @@ li button:hover {
 }
 
 
-.poids-important {
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  margin-top: 20px;
-  text-align: center;
-}
+
 
 
 @media (max-width: 600px) {
@@ -175,6 +169,7 @@ li button:hover {
   0%   { background-color: #ffeaa7; }
   100% { background-color: white; }
 }
+
 
 
 
