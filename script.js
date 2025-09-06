@@ -1039,7 +1039,7 @@ const baremes = {
     114: 15919,
     115: 16349
   },
-  carrelet: {
+  carrelet_plie_flet: {
     1: 1,
     15: 33,
     16: 41,
@@ -5659,3 +5659,4 @@ function exporterSession() {
 
 // Recharge les données quand le nom change
 document.getElementById("pecheur").addEventListener("change", chargerPoissons);
+
