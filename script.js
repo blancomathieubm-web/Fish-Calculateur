@@ -6205,11 +6205,8 @@ const baremes = {
 
 
 
-
-// Variable globale pour suivre le poids total
 let totalPoids = 0;
 
-// Fonction principale pour ajouter un poisson
 function ajouterPoisson() {
   const espece = document.getElementById("espece").value;
   const longueur = parseInt(document.getElementById("longueur").value);
@@ -6229,7 +6226,7 @@ function ajouterPoisson() {
 
   if (!poidsGr) {
     if (longueur >= 1 && longueur <= 15) {
-      poidsGr = 1; // poids par défaut
+      poidsGr = 1;
     } else {
       alert("Longueur non disponible pour cette espèce.");
       return;
@@ -6267,7 +6264,6 @@ function ajouterPoisson() {
   document.getElementById("espece").selectedIndex = 0;
 }
 
-// Sauvegarde dans le localStorage
 function sauvegarderPoissons() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6281,7 +6277,6 @@ function sauvegarderPoissons() {
   localStorage.setItem(`poids_${pecheur}`, totalPoids);
 }
 
-// Chargement des données
 function chargerPoissons() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6313,7 +6308,6 @@ function chargerPoissons() {
     `Poids total : ${(totalPoids / 1000).toFixed(3)} kg`;
 }
 
-// Réinitialisation de la session
 function reinitialiserSession() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) return;
@@ -6327,7 +6321,6 @@ function reinitialiserSession() {
   }
 }
 
-// Export de la session
 function exporterSession() {
   const pecheur = document.getElementById("pecheur").value.trim();
   if (!pecheur) {
@@ -6357,10 +6350,5 @@ function exporterSession() {
   lien.click();
 }
 
-// Chargement automatique quand le nom change
+// Recharge les données quand le nom change
 document.getElementById("pecheur").addEventListener("change", chargerPoissons);
-
-// 🔓 Expose les fonctions globalement pour les boutons HTML
-window.ajouterPoisson = ajouterPoisson;
-window.reinitialiserSession = reinitialiserSession;
-window.exporterSession = exporterSession;
