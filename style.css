@@ -101,40 +101,7 @@ li button:hover {
   padding: 20px;
   text-align: center;
 }
-.bouton-soft {
-  background-color: #3490db;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-.bouton-soft:hover {
-  background-color: #2176bd;
-}
-
-
-.bouton-neon {
-  background-color: transparent;
-  color: #00f0ff;
-  border: 2px solid #00f0ff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  text-shadow: 0 0 5px #00f0ff;
-  box-shadow: 0 0 10px #00f0ff;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.bouton-neon:hover {
-  background-color: #00f0ff;
-  color: #000;
-}
 
 
 
@@ -169,6 +136,7 @@ li button:hover {
   0%   { background-color: #ffeaa7; }
   100% { background-color: white; }
 }
+
 
 
 
