@@ -1,7 +1,3 @@
-// Forcer le rechargement avec un paramètre unique pour contourner le cache
-if (location.href.indexOf('nocache') === -1) {
-  location.href = location.href + '?nocache=' + new Date().getTime();
-}
 
 const baremes = {
   alose: {
@@ -6336,6 +6332,15 @@ function reinitialiserSession() {
 // Recharge les données du pêcheur dès que son nom est modifié
 document.getElementById("pecheur").addEventListener("change", chargerPoissons);
 
+
+
+window.addEventListener("load", function () {
+  if (location.href.indexOf('nocache') === -1) {
+    location.href = location.href + '?nocache=' + new Date().getTime();
+  }
+});
+
+
 // Fonction pour exporter la session du pêcheur en fichier texte
 function exporterSession() {
   const pecheur = document.getElementById("pecheur").value.trim();
@@ -6365,6 +6370,7 @@ function exporterSession() {
   lien.download = `session_${pecheur}.txt`;
   lien.click();
 }
+
 
 
 
