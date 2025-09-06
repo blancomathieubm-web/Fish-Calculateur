@@ -1,4 +1,4 @@
-/* 🌍 Base générale */
+/* 🌌 Fond sombre et base typographique */
 body {
   background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
   font-family: 'Roboto', sans-serif;
@@ -6,7 +6,7 @@ body {
   padding: 20px;
 }
 
-/* 🏷️ Titres */
+/* 🏷️ Titre principal */
 h2 {
   font-size: 32px;
   color: #f1c40f;
@@ -14,13 +14,14 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* 🧾 Formulaires */
+/* 🧾 Étiquettes de formulaire */
 label {
   font-weight: bold;
   display: block;
   margin-top: 10px;
 }
 
+/* ✏️ Champs de saisie et menus */
 input, select {
   margin-top: 5px;
   margin-bottom: 10px;
@@ -170,40 +171,5 @@ li button:hover {
   to {
     opacity: 0;
     visibility: hidden;
-  }
-}
-
-/* 🌗 Mode clair automatique */
-@media (prefers-color-scheme: light) {
-  body {
-    background: linear-gradient(to bottom, #f0f3f5, #dfe6e9, #b2bec3);
-    color: #2c3e50;
-  }
-
-  input, select {
-    background-color: #ecf0f1;
-    color: #2c3e50;
-  }
-
-  button {
-    background-color: #3498db;
-    color: white;
-  }
-
-  button:hover {
-    background-color: #2980b9;
-  }
-
-  li {
-    background: rgba(0, 0, 0, 0.05);
-    border-left: 5px solid #3498db;
-  }
-
-  li button {
-    background-color: #e74c3c;
-  }
-
-  li button:hover {
-    background-color: #c0392b;
   }
 }
